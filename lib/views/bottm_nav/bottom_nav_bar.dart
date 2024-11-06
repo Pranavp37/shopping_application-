@@ -13,11 +13,10 @@ class BottonNavBar extends StatefulWidget {
 class _BottonNavBarState extends State<BottonNavBar> {
   int _currentIndex = 0;
 
-
   final List<Widget> _pages = [
     HomeScreen(),
     const CartScreen(),
-    const AccountScreen(),
+    const UserAccountScreen(),
   ];
 
   void _onTabTapped(int index) {

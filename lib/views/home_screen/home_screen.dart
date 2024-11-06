@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_application/controller/api_data_controller.dart';
+import 'package:shopping_application/controller/auth_controller.dart';
 import 'package:shopping_application/views/product_details_screen/product_details_screen.dart';
 import 'package:shopping_application/widgets/product_card.dart';
 
@@ -8,10 +9,12 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final ApiDataController apiDataController = Get.find();
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 10,
         title: const Text(
           'Discover',
           style: TextStyle(
@@ -32,7 +35,9 @@ class HomeScreen extends StatelessWidget {
               Icons.logout,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              authController.logout();
+            },
           ),
         ],
       ),
@@ -48,27 +53,21 @@ class HomeScreen extends StatelessWidget {
 
         return Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search Anything',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                    ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Text(
+                  'Available Products',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(width: 10),
-                  IconButton(
-                    icon: const Icon(Icons.filter_list),
-                    onPressed: () {},
-                  ),
-                ],
+                ),
               ),
             ),
             Expanded(
@@ -88,6 +87,7 @@ class HomeScreen extends StatelessWidget {
                       onTap: () {
                         Get.to(
                           ProductDetailScreen(
+                            id: data.id,
                             title: data.title,
                             description: data.description,
                             image: data.image,

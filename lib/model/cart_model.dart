@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part  'cart_model.g.dart';
+part 'cart_model.g.dart';
 
 @HiveType(typeId: 1)
 class CartModel {
@@ -24,4 +24,21 @@ class CartModel {
     this.price,
     this.qty,
   });
+  CartModel copyWith({
+    int? id,
+    String? image,
+    String? name,
+    double? price,
+    String? desc,
+    int? qty,
+  }) {
+    return CartModel(
+      id: id ?? this.id,
+      image: image ?? this.image,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      desc: desc ?? this.desc,
+      qty: qty ?? this.qty,
+    );
+  }
 }

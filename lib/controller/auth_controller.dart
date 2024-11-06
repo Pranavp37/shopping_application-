@@ -18,11 +18,14 @@ class AuthController extends GetxController {
 
   Future<void> authregister(UserModel userModel) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      var data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: userModel.email!, password: userModel.password!);
       Get.snackbar("Regiater", 'Register Successfully');
       Get.off(LoginScreen());
-      await FirebaseFirestore.instance.collection('user').doc().set({
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(data.user!.uid)
+          .set({
         "username": userModel.name,
         "email": userModel.email,
       });
