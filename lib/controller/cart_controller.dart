@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shopping_application/model/cart_model.dart';
 
 class CartController extends GetxController {
-  // Observable
+
   var cartProduct = <CartModel>[].obs;
 
   var keys = <dynamic>[].obs;

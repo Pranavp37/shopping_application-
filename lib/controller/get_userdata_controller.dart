@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:shopping_application/model/user_model.dart';
 
 class GetUserdataController extends GetxController {
-  var UerData = Rxn<UserModel>();
+  var uerData = Rxn<UserModel>();
   var isloading = false.obs;
   var error = ''.obs;
 
@@ -26,7 +26,7 @@ class GetUserdataController extends GetxController {
       log(uid.toString());
       var data =
           await FirebaseFirestore.instance.collection('user').doc(uid).get();
-      UerData.value = UserModel.fromJson(data.data()!);
+      uerData.value = UserModel.fromJson(data.data()!);
     } catch (e) {
       error(e.toString());
     } finally {
